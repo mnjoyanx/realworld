@@ -20,26 +20,26 @@
     <div class="container mx-auto py-8">
       <div class="w-5/6 lg:w-1/2 mx-auto bg-white rounded shadow">
             <div class="py-4 px-8 text-md-primary border-b border-grey-lighter">Register for a free account</div>
-            <div class="py-4 px-8">
+            <form @submit.prevent="registerHandler" class="py-4 px-8">
                 <div class="mb-4">
                         <label class="block text-grey-darker text-sm font-bold mb-2" for="username">UserName</label>
-                        <input class="appearance-none border rounded w-full py-2 px-3 text-grey-darker" id="username" type="text" placeholder="UserName">
+                        <input v-model="form.username" class="appearance-none border rounded w-full py-2 px-3 text-grey-darker" id="username" type="text" placeholder="UserName">
                     </div>
                 <div class="mb-4">
                     <label class="block text-grey-darker text-sm font-bold mb-2" for="email">Email</label>
-                    <input class="appearance-none border rounded w-full py-2 px-3 text-grey-darker" id="email" type="email" placeholder="Your email address">
+                    <input v-model="form.email" class="appearance-none border rounded w-full py-2 px-3 text-grey-darker" id="email" type="email" placeholder="Your email address">
                 </div>
                 <div class="mb-4">
                     <label class="block text-grey-darker text-sm font-bold mb-2" for="password">Password</label>
-                    <input class="appearance-none border rounded w-full py-2 px-3 text-grey-darker" id="password" type="password" placeholder="Your secure password">
+                    <input v-model="form.password" class="appearance-none border rounded w-full py-2 px-3 text-grey-darker" id="password" type="password" placeholder="Your secure password">
                     <p class="text-grey text-xs mt-1">At least 6 characters</p>
                 </div>
                 <div class="flex items-center justify-between mt-8">
-                    <button class="bg-blue hover:bg-blue-dark text-white font-bold py-2 px-4 rounded-full" type="submit">
+                    <button class="bg-primary hover:bg-blue-dark text-white font-bold py-2 px-4 rounded-md" :class="{'cursor-wait': !submitForm}" :disabled="!submitForm" type="submit">
                         Sign Up
                     </button>
                 </div>
-            </div>
+            </form>
         </div>
         <p class="text-center my-4">
             <router-link :to="{name: 'login'}" class="text-sm-primary okay no-underline hover:text-green-darker">have an account?</router-link>
@@ -51,10 +51,32 @@
 </template>
 
 <script>
+    import {mapGetters} from 'vuex'
     export default {
-    name: 'register'
+        name: 'register',
+        data() {
+            return {
+                form: {
+                    username: '',
+                    email: '',
+                    password: ''
+                }
+            }
+        },
+
+        computed: {
+            ...mapGetters(['submitForm'])
+        },
+
+        methods: {
+            registerHandler() {
+                console.log(this.form)
+            }
+        }
     }
 </script>
+
+
 
 <style>
     @import '/public/apply';
@@ -65,5 +87,9 @@
 
     .text-md-primary {
         @apply text-green-700 text-xl;
+    }
+
+    .bg-primary {
+        @apply bg-green-500
     }
 </style>

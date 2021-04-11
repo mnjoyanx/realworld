@@ -1,8 +1,12 @@
 export default {
     state: {
-        first: 'hello from vuex store'
+        isSubmitting: false
     },
     mutations: {},
     actions: {},
-    getters: {},
+    getters: {
+        submitForm(state) {
+            return state.isSubmitting
+        }
+    },
 }
