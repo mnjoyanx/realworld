@@ -1,54 +1,22 @@
 <template>
-  <nav class="relative select-none bg-indigo-600 lg:flex lg:items-stretch w-full">
-    <div class="flex flex-no-shrink items-stretch h-12">
-      <a
-        href="#"
-        class="flex-no-grow flex-no-shrink relative py-2 px-4 leading-normal text-white no-underline flex items-center hover:bg-grey-dark"
-        >Tailwind</a
-      >
-      <a
-        href="#"
-        class="flex-no-grow flex-no-shrink relative py-2 px-4 leading-normal text-white no-underline flex items-center hover:bg-grey-dark"
-        >Css</a
-      >
-      <button
-        class="block lg:hidden cursor-pointer ml-auto relative w-12 h-12 p-4"
-      >
-        <svg
-          class="fill-current text-white"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 20 20"
-        >
-          <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
-        </svg>
-        <svg
-          class="fill-current text-white"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 20 20"
-        >
-          <path
-            d="M10 8.586L2.929 1.515 1.515 2.929 8.586 10l-7.071 7.071 1.414 1.414L10 11.414l7.071 7.071 1.414-1.414L11.414 10l7.071-7.071-1.414-1.414L10 8.586z"
-          />
-        </svg>
-      </button>
-    </div>
-    <div class="lg:flex lg:items-stretch lg:flex-no-shrink lg:flex-grow">
-      <div class="lg:flex lg:items-stretch lg:justify-end ml-auto">
-        <a
-          href="#"
-          class="flex-no-grow flex-no-shrink relative py-2 px-4 leading-normal text-white no-underline flex items-center hover:bg-grey-dark"
-          >Item 1</a
-        >
-        <a
-          href="#"
-          class="flex-no-grow flex-no-shrink relative py-2 px-4 leading-normal text-white no-underline flex items-center hover:bg-grey-dark"
-          >Item 2</a
-        >
-        <a
-          href="#"
-          class="flex-no-grow flex-no-shrink relative py-2 px-4 leading-normal text-white no-underline flex items-center hover:bg-grey-dark"
-          >Item 3</a
-        >
+  <nav
+    class="relative select-none bg-indigo-600 lg:flex lg:items-stretch w-full"
+  >
+    <div class="container mx-auto">
+      <div class="flex justify-between items-center">
+        <div>
+          <router-link :to="{ name: 'home' }" tag="p" class="text-white text-2xl">Home</router-link>
+        </div>
+        <div class="flex justify-between flex-no-shrink items-center h-12">
+          <router-link
+            tag="p"
+            class="text-white text-lg ml-4 cursor-pointer" 
+            v-for="route in routes"
+            :key="route.id"
+            :to="{ name: route.name }"
+            >{{ route.title }}</router-link
+          >
+        </div>
       </div>
     </div>
   </nav>
@@ -56,7 +24,15 @@
 
 <script>
 export default {
-    name: 'navbar'
+  name: 'navbar',
+  data() {
+    return {
+      routes: [
+        { id: 0, name: 'login', title: 'Sign In' },
+        { id: 1, name: 'register', title: 'Sing Up' }
+      ]
+    }
+  }
 }
 </script>
 
