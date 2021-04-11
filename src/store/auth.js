@@ -4,7 +4,7 @@ export default {
     state: {
         isSubmitting: false,
         errors: null,
-        user: null  
+        user: null
     },
     mutations: {
         REGISTER_START(state) {
@@ -20,9 +20,9 @@ export default {
         // }
     },
     actions: {
-        async REGISTER_HANDLER(context, {payload}) {
+        REGISTER_HANDLER({ commit }, payload) {
             return new Promise((res, rej) => {
-                context.commit('REGISTER_START')
+                commit('REGISTER_START')
                 try {
                     // context.commmit()
                     register(payload)
