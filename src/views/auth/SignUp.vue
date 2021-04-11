@@ -35,7 +35,7 @@
                     <p class="text-grey text-xs mt-1">At least 6 characters</p>
                 </div>
                 <div class="flex items-center justify-between mt-8">
-                    <button class="bg-primary hover:bg-blue-dark text-white font-bold py-2 px-4 rounded-md" :class="{'cursor-wait': !submitForm}" :disabled="!submitForm" type="submit">
+                    <button class="bg-primary hover:bg-blue-dark text-white font-bold py-2 px-4 rounded-md" :class="{'cursor-wait': submitForm}" :disabled="submitForm" type="submit">
                         Sign Up
                     </button>
                 </div>
@@ -70,7 +70,7 @@
 
         methods: {
             registerHandler() {
-                console.log(this.form)
+                this.$store.dispatch('REGISTER_HANDLER', {username: this.form.username, email: this.form.email, password: this.form.password})
             }
         }
     }
