@@ -22,8 +22,8 @@
             <div class="py-4 px-8 text-md-primary border-b border-grey-lighter">Register for a free account</div>
             <form @submit.prevent="registerHandler" class="py-4 px-8">
                 <div class="mb-4">
-                        <label class="block text-grey-darker text-sm font-bold mb-2" for="username">UserName</label>
-                        <input v-model="form.username" class="appearance-none border rounded w-full py-2 px-3 text-grey-darker" id="username" type="text" placeholder="UserName">
+                        <label class="block text-grey-darker text-sm font-bold mb-2" for="name">Name</label>
+                        <input v-model="form.name" class="appearance-none border rounded w-full py-2 px-3 text-grey-darker" id="name" type="text" placeholder="Name">
                     </div>
                 <div class="mb-4">
                     <label class="block text-grey-darker text-sm font-bold mb-2" for="email">Email</label>
@@ -57,7 +57,7 @@
         data() {
             return {
                 form: {
-                    username: '',
+                    name: '',
                     email: '',
                     password: ''
                 }
@@ -70,7 +70,12 @@
 
         methods: {
             registerHandler() {
-                this.$store.dispatch('REGISTER_HANDLER', {username: this.form.username, email: this.form.email, password: this.form.password})
+                const user = {
+                    name: this.form.name, 
+                    email: this.form.email,
+                    password: this.form.password
+                }
+                this.$store.dispatch('REGISTER_HANDLER', user)
             }
         }
     }
