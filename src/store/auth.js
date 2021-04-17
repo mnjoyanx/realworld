@@ -1,41 +1,40 @@
 import { register } from '@/api/auth'
-// import axios from 'axios'
+import {setitem} from '@/helpers/localeStorage'
 
 export default {
     state: {
         isSubmitting: false,
         errors: null,
-        user: null
+        currentUser: null,
+        isLoggedIn: null
     },
     mutations: {
         REGISTER_START(state) {
             state.isSubmitting = true
+            state.errors = null
         },
         
         REGISTER_SUCCESS(state, payload) {
-            state.user = payload
+            state.currentUser = payload
+            state.isLoggedIn = true
             state.isSubmitting = false
         },
 
         REGISTER_FAILURE(state, payload) {
-            console.log(payload, 666666)
             state.errors = payload
+            state.isLoggedIn = false
             state.isSubmitting = false
         },
         
-        SET_ERRORS(state) {
-            state.errors = null
-        }
     },
     actions: {
         REGISTER_HANDLER({ commit }, payload) {
             return new Promise(res => {
-                commit('SET_ERRORS')
                 commit('REGISTER_START')
                     register(payload)
                         .then(result => {
-                            commit('SET_ERRORS')
-                            commit('REGISTER_SUCCESS', result.data)
+                            commit('REGISTER_SUCCESS', result.data.user)
+                            setitem('accessToken', result.data.user.token)
                             res(result)
                         })
                 .catch(err => {
@@ -51,10 +50,12 @@ export default {
         },
         getErrors(state) {
             if (state.errors) {
-                return Object.entries(state.errors).map(item => {
-                return item
+                return Object.keys(state.errors).map(item => {
+                    const messages = state.errors[item].join(', ')
+                    return `${item}: ${messages}`
             })
+                
             }
         }
-    },
+    }
 }

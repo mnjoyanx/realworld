@@ -1,7 +1,7 @@
 <template>
   <div class="font-sans antialiased bg-grey-lightest">
     <!-- Top Nav -->
-    <div class="w-full bg-green fixed shadow z-1">
+    <div class="w-full shadow z-1">
       <div class="container mx-auto">
         <div class="w-full flex justify-between items-center py-4 px-8">
           <!-- Brand -->
@@ -34,6 +34,11 @@
           <div class="py-4 px-8 text-md-primary border-b border-grey-lighter">
             Register for a free account
           </div>
+
+          <template v-if="getErrors">
+            <validation-errors :validation-err="getErrors" />
+          </template>
+          
           <form @submit.prevent="registerHandler" class="py-4 px-8">
             <div class="mb-4">
               <label
@@ -86,7 +91,7 @@
                 :disabled="isSubmitting"
                 type="submit"
               >
-                Sign Up {{ getErrors }}
+                Sign Up 
               </button>
             </div>
           </form>
@@ -105,6 +110,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import ValidationErrors from '../../components/ValidationErrors.vue'
 export default {
   name: 'register',
   data() {
@@ -117,6 +123,9 @@ export default {
     }
   },
 
+  components: {
+    ValidationErrors
+  },
   computed: {
     ...mapGetters(['isSubmitting', 'getErrors']),
   },
@@ -130,7 +139,7 @@ export default {
       }
       this.$store
         .dispatch('REGISTER_HANDLER', user)
-        .then((res) => console.log(res, 'ressss'))
+        .then(() => this.$router.push({name: 'home'}))
     },
   },
 }
