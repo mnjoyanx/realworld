@@ -1,5 +1,5 @@
 import axios from 'axios'
 
-axios.defaults.baseURL = 'http://devcamp-api-node.herokuapp.com/api/v1/'
+axios.defaults.baseURL = 'https://conduit.productionready.io/api'
 
 export default axios
