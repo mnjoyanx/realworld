@@ -6,22 +6,30 @@ Vue.use(VueRouter)
 
 const router = new VueRouter({
     mode: "history",
-    routes: [
-        {
+    routes: [{
             path: '/',
-            component: () => import('@/views/Home'),
+            component: () =>
+                import ('@/views/Home'),
             name: 'home'
         },
 
         {
+            path: '/about',
+            component: () =>
+                import ('@/views/About')
+        },
+
+        {
             path: '/login',
-            component: () => import('@/views/auth/SignIn'),
+            component: () =>
+                import ('@/views/auth/SignIn'),
             name: 'login'
         },
 
         {
             path: '/register',
-            component: () => import('@/views/auth/SignUp'),
+            component: () =>
+                import ('@/views/auth/SignUp'),
             name: 'register'
         }
     ]
