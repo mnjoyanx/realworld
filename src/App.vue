@@ -14,6 +14,8 @@
 </template>
 
 <script>
+    import {mapActions} from 'vuex'
+
 import Navbar from '@/components/partials/Navbar.vue'
 
 export default {
@@ -23,7 +25,14 @@ export default {
     getStoreItem() {
       return this.$store.state.auth.first
     }
-  }
+  },
+
+   methods: {
+            ...mapActions(['GET_CURRENT_USER']),
+        },
+        created() {
+            this.GET_CURRENT_USER()
+        }
 }
 </script>
 

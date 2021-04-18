@@ -7,3 +7,7 @@ export const register = (body) => {
 export const login = (body) => {
     return axios.post('/users/login', { user: body })
 }
+
+export const getCurrentUser = () => {
+    return axios.get('/user')
+}
