@@ -109,7 +109,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import ValidationErrors from '../../components/ValidationErrors.vue'
 export default {
   name: 'register',
@@ -131,14 +131,14 @@ export default {
   },
 
   methods: {
+    ...mapActions(['REGISTER_HANDLER']),
     registerHandler() {
       const user = {
         username: this.form.name,
         email: this.form.email,
         password: this.form.password,
       }
-      this.$store
-        .dispatch('REGISTER_HANDLER', user)
+      this.REGISTER_HANDLER(user)
         .then(() => this.$router.push({name: 'home'}))
     },
   },

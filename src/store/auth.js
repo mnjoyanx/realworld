@@ -67,13 +67,12 @@ export default {
                 commit('LOGIN_START')
                 login(payload)
                     .then(result => {
-                        commit('LOGIN_SUCCESS')
-                        console.log(result)
-                        res()
+                        commit('LOGIN_SUCCESS', result.data.user)
+                        res(result.data.user)
                     })
                     .catch(err => {
-                        commit('LOGIN_FAILURE')
-                        rej(err)
+                        commit('LOGIN_FAILURE', err.response.data.errors)
+                        rej(err.response.data.errors)
                     })
             })
         }

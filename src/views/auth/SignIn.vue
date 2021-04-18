@@ -7,9 +7,9 @@
             Login 
             </div>
 
-          <!-- <template v-if="getErrors">
+          <template v-if="getErrors">
             <validation-errors :validation-err="getErrors" />
-          </template> -->
+          </template>
           
           <form @submit.prevent="loginHandler" class="py-4 px-8">
         
@@ -47,7 +47,7 @@
                 class="bg-primary relative hover:bg-blue-dark text-white font-bold py-2 px-4 rounded-md"
                 type="submit"
               >
-                Sign Up 
+                Sign In
               </button>
             </div>
           </form>
@@ -56,7 +56,9 @@
           <router-link
             :to="{ name: 'register' }"
             class="text-sm-primary okay no-underline hover:text-green-darker"
-            >have not an account?</router-link
+            :class="{'cursor-wait': isSubmitting}"
+            :disabled="isSubmitting"
+            >Need an account?</router-link
           >
         </p>
       </div>
@@ -65,8 +67,13 @@
 </template>
 
 <script>
+import {mapGetters, mapActions} from 'vuex'
+import ValidationErrors from '@/components/ValidationErrors'
     export default {
         name: 'login',
+        components: {
+            ValidationErrors
+        },
         data() {
             return {
                 form: {
@@ -76,18 +83,21 @@
             }
         },
         methods: {
+                ...mapActions(['LOGIN_HANDLER']),
             loginHandler() {
                 const user = {
                     email: this.form.email,
                     password: this.form.password
-                }
+                },
 
-                this.$store.dispatch('LOGIN_HANDLER', user)
+                this.LOGIN_HANDLER(user)
+                    .then(() => {
+                        this.$router.push({name: 'home'})
+})
             }
+        },
+        computed: {
+            ...mapGetters(['getErrors', 'isSubmitting'])
         }
     }
 </script>
-
-<style lang="scss" scoped>
-
-</style>
