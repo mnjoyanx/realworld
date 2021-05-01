@@ -52,7 +52,7 @@ export default {
     CURRENT_USER_SUCCESS(state, payload) {
       state.currentUser = payload
       state.isLoading = false
-      state.isLoggedIn = false
+      state.isLoggedIn = true
       state.errors = null
     },
 
@@ -84,7 +84,7 @@ export default {
           .then(result => {
               commit('LOGIN_SUCCESS', result.data.user)
               setitem('accessToken', result.data.user.token)
-            res(result.data.user)
+              res(result.data.user)
           })
           .catch(err => {
             commit('LOGIN_FAILURE', err.response.data.errors)
@@ -98,7 +98,7 @@ export default {
         commit('CURRENT_USER_START')
         getCurrentUser()
             .then(result => {
-              console.log(result)
+              console.log(result, 'current user')
             commit('CURRENT_USER_SUCCESS', result.data.user)
             res(result.data)
           })
