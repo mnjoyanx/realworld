@@ -2,17 +2,26 @@
   <div>
     <h2>This is Home page</h2>
     <div class="mt-4">
-      <feed />
+      <div class="container mx-auto">
+        <div class="flex justify-between">
+          <global-feed :api-url="apiUrl" />
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import Feed from '@/components/feed/Feed'
+import GlobalFeed from '@/components/GlobalFeed'
 export default {
   name: 'home',
   components: {
-    Feed
+    GlobalFeed
+  },
+  data() {
+    return {
+      apiUrl: '/articles'
+    }
   }
 }
 </script>
