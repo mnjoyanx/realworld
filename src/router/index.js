@@ -20,6 +20,13 @@ const router = new VueRouter({
         },
 
         {
+            path: "/:username",
+            name: "userProfile",
+            component: () => import('@/views/user/Profile'),
+            params: true
+        },
+
+        {
             path: '/login',
             component: () =>
                 import ('@/views/auth/SignIn'),

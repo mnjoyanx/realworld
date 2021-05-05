@@ -40,5 +40,9 @@ export default {
         }
     },
 
-    getters: {}
+    getters: {
+        getArticles(state) {
+            return state.articles
+        }
+    }
 }
