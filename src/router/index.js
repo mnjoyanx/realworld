@@ -27,6 +27,17 @@ const router = new VueRouter({
         },
 
         {
+            path: "/articles/:slug",
+            component: () => import("@/views/user/Profile"),
+            name: "article"
+        },
+        {
+            path: "/articles/:slug/edit",
+            component: () => import("@/views/user/Profile"),
+            name: "articleEdit"
+        },
+
+        {
             path: '/login',
             component: () =>
                 import ('@/views/auth/SignIn'),
