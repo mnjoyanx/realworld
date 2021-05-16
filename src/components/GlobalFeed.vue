@@ -65,7 +65,7 @@
           </div>
         </div>
       </div>
-      <pagination />
+      <pagination :total="total" :limit="limit" :per-page="perPage" />
     </template>
   </div>
 </template>
